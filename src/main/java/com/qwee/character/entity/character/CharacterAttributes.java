@@ -1,4 +1,4 @@
-package com.qwee.character.entity;
+package com.qwee.character.entity.character;
 
 import lombok.Data;
 
