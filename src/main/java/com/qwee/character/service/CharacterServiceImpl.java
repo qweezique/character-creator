@@ -22,6 +22,11 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    public CharacterEntity findByName(String name) {
+        return characterRepository.findByName(name).orElseThrow(() -> new NoCharacterException("Character with name " + name + "not found"));
+    }
+
+    @Override
     public List<CharacterEntity> findAll() {
         List<CharacterEntity> all = characterRepository.findAll();
         if (all.isEmpty()) {
@@ -35,11 +40,16 @@ public class CharacterServiceImpl implements CharacterService {
 
         CharacterEntity character = new CharacterEntity();
         character.setAttributes(adder.getAttributes());
-        character.setType(adder.getGuildType());
+        character.setType(adder.getType());
         character.setName(adder.getName());
         character.setRegistrationDate(adder.getCreationDate());
         character.setLevel(adder.getLevel());
 
+        return characterRepository.save(character);
+    }
+
+    @Override
+    public CharacterEntity save(CharacterEntity character) {
         return characterRepository.save(character);
     }
 

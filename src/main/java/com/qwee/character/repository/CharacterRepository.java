@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface CharacterRepository extends JpaRepository<CharacterEntity, Integer> {
 
     Optional<CharacterEntity> findByName(String name);
+
 }

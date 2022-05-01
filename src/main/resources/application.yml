@@ -8,7 +8,7 @@ spring:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     open-in-view: false
     properties:
       generate-ddl: true

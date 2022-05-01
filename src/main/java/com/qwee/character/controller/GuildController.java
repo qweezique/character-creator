@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/guild")
 @RequiredArgsConstructor
@@ -19,8 +21,13 @@ public class GuildController {
     private final GuildServiceImpl guildService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<GuildEntity>> getALl() {
+        return ResponseEntity.ok(guildService.findAll());
+    }
+
+    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<GuildEntity> getByName(GuildType type) {
-        return ResponseEntity.ok(guildService.findByName(type));
+        return ResponseEntity.ok(guildService.findByType(type));
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -30,13 +37,15 @@ public class GuildController {
 
     @GetMapping(value = "/init")
     public void init() {
-        GuildEntity guildEntity = new GuildEntity();
-        guildEntity.setId(1);
-        guildEntity.setDescription("desctiption");
-        guildEntity.setName("WIZZARD");
+        GuildEntity wizzardGuild = new GuildEntity();
+        wizzardGuild.setDescription("Волшебнкии обладают высоким интеллектом, но слабы в ближних боях");
+        wizzardGuild.setName(GuildType.WIZZARD);
+        guildService.addGuild(wizzardGuild);
 
-        guildService.addGuild(guildEntity);
+        GuildEntity knightGuild = new GuildEntity();
+        knightGuild.setDescription("Зачем нужен интеллект, если есть сила о отвага?");
+        knightGuild.setName(GuildType.KNIGHT);
+        guildService.addGuild(knightGuild);
     }
-
 
 }

@@ -6,14 +6,16 @@ import com.qwee.character.repository.GuildRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class GuildServiceImpl implements GuildService {
     private final GuildRepository guildRepository;
 
     @Override
-    public GuildEntity findByName(GuildType guildType) {
-        return guildRepository.findByName(guildType.name());
+    public GuildEntity findByType(GuildType guildType) {
+        return guildRepository.findByName(guildType);
     }
 
     @Override
@@ -22,8 +24,18 @@ public class GuildServiceImpl implements GuildService {
     }
 
     @Override
+    public List<GuildEntity> findAll() {
+        return guildRepository.findAll();
+    }
+
+    @Override
     public GuildEntity addGuild(GuildEntity guild) {
 
         return guildRepository.save(guild);
+    }
+
+    @Override
+    public void save(GuildEntity guildEntity) {
+        guildRepository.save(guildEntity);
     }
 }

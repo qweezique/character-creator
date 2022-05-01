@@ -1,6 +1,7 @@
 package com.qwee.character.entity.character;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qwee.character.entity.guild.GuildEntity;
 import com.qwee.character.model.dto.request.GuildType;
 import lombok.Getter;
@@ -10,7 +11,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
 
 
 @Getter
@@ -35,10 +35,13 @@ public class CharacterEntity {
     @Column(name = "REGISTRATION_DATE")
     private LocalDate registrationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "GUILD_ID")
+    @JsonBackReference
     private GuildEntity guild;
 
-    @Column(name = "type")
+    @Column(name = "TYPE")
+    @Enumerated(EnumType.STRING)
     private GuildType type;
 
     @Embedded

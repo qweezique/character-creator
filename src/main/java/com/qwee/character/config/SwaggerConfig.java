@@ -22,7 +22,7 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title(appName)
                         .version(appVersion)
-                        .description("Приложения для управления игровыми персонажами")
+                        .description("Приложения для управления игровыми персонажами, добавление в гильдию")
                         .contact(new Contact()
                                 .name("Никита Ковалев")
                                 .email("qweezique@gmail.com"))

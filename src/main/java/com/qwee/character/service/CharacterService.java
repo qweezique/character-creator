@@ -9,8 +9,11 @@ public interface CharacterService {
 
     CharacterEntity findById(Integer id);
 
+    CharacterEntity findByName(String name);
+
     List<CharacterEntity> findAll();
 
     CharacterEntity createCharacter(CharacterAdder adder);
 
+    CharacterEntity save(CharacterEntity character);
 }

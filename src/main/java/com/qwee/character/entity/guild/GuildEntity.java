@@ -1,11 +1,12 @@
 package com.qwee.character.entity.guild;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.qwee.character.entity.character.CharacterEntity;
+import com.qwee.character.model.dto.request.GuildType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,12 +27,13 @@ public class GuildEntity {
     private Integer id;
 
     @Column(name = "NAME")
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private GuildType name;
 
     @Column(name = "DESCR")
     private String description;
 
-    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
     private List<CharacterEntity> characters = new ArrayList<>();
-
 }

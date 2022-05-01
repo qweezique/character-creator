@@ -13,6 +13,6 @@ public class CharacterAdder {
     private String name;
     private LocalDate creationDate = LocalDate.now();
     private CharacterAttributes attributes;
-    private GuildType guildType;
+    private GuildType type;
 
 }
