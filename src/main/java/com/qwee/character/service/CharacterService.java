@@ -11,5 +11,6 @@ public interface CharacterService {
 
     List<CharacterEntity> findAll();
 
-    CharacterEntity add(CharacterAdder characterAdder);
+    CharacterEntity createCharacter(CharacterAdder adder);
+
 }

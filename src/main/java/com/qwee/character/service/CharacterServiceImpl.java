@@ -31,7 +31,16 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public CharacterEntity add(CharacterAdder characterAdder) {
-        return null;
+    public CharacterEntity createCharacter(CharacterAdder adder) {
+
+        CharacterEntity character = new CharacterEntity();
+        character.setAttributes(adder.getAttributes());
+        character.setGuildType(adder.getGuildType());
+        character.setName(adder.getName());
+        character.setRegistrationDate(adder.getCreationDate());
+        character.setLevel(adder.getLevel());
+
+        return characterRepository.save(character);
     }
+
 }

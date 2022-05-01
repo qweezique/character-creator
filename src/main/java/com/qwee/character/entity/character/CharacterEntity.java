@@ -1,6 +1,7 @@
 package com.qwee.character.entity.character;
 
 import com.qwee.character.entity.guild.GuildEntity;
+import com.qwee.character.model.dto.request.GuildType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -36,6 +37,9 @@ public class CharacterEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CHARACTER_GUILD_ID")
     private GuildEntity guild;
+
+    @Column(name = "GUILD_NAME")
+    private GuildType guildType;
 
     @Embedded
     private CharacterAttributes attributes;
