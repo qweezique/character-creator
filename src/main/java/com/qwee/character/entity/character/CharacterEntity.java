@@ -1,5 +1,6 @@
 package com.qwee.character.entity.character;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.qwee.character.entity.guild.GuildEntity;
 import com.qwee.character.model.dto.request.GuildType;
 import lombok.Getter;
@@ -34,27 +35,13 @@ public class CharacterEntity {
     @Column(name = "REGISTRATION_DATE")
     private LocalDate registrationDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CHARACTER_GUILD_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
     private GuildEntity guild;
 
-    @Column(name = "GUILD_NAME")
-    private GuildType guildType;
+    @Column(name = "type")
+    private GuildType type;
 
     @Embedded
     private CharacterAttributes attributes;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CharacterEntity that = (CharacterEntity) o;
-        return id.equals(that.id) && name.equals(that.name) && Objects.equals(level, that.level) && Objects.equals(registrationDate, that.registrationDate) && Objects.equals(guild, that.guild) && attributes.equals(that.attributes);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, level, registrationDate, guild, attributes);
-    }
 }
 

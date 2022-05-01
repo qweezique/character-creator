@@ -35,7 +35,7 @@ public class CharacterServiceImpl implements CharacterService {
 
         CharacterEntity character = new CharacterEntity();
         character.setAttributes(adder.getAttributes());
-        character.setGuildType(adder.getGuildType());
+        character.setType(adder.getGuildType());
         character.setName(adder.getName());
         character.setRegistrationDate(adder.getCreationDate());
         character.setLevel(adder.getLevel());

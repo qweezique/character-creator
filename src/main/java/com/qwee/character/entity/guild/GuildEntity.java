@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,12 +25,13 @@ public class GuildEntity {
     @Column(name = "GUILD_ID")
     private Integer id;
 
-    @Column(name = "TYPE", nullable = false)
-    private String type;
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "DESCR")
     private String description;
 
-    @OneToMany (mappedBy = "guild")
+    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL)
     private List<CharacterEntity> characters = new ArrayList<>();
+
 }
