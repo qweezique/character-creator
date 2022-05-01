@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 
 @Getter
@@ -38,5 +39,18 @@ public class CharacterEntity {
 
     @Embedded
     private CharacterAttributes attributes;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CharacterEntity that = (CharacterEntity) o;
+        return id.equals(that.id) && name.equals(that.name) && Objects.equals(level, that.level) && Objects.equals(registrationDate, that.registrationDate) && Objects.equals(guild, that.guild) && attributes.equals(that.attributes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, level, registrationDate, guild, attributes);
+    }
 }
 

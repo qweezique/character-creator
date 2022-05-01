@@ -1,4 +1,9 @@
 spring:
+  application:
+    name: character-creator
+    version: 0.0.1-SNAPSHOT
+
+
   jpa:
     database: POSTGRESQL
     show-sql: true
