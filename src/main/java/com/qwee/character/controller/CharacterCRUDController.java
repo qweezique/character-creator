@@ -55,6 +55,12 @@ public class CharacterCRUDController {
         return ResponseEntity.ok(String.format("Character with id: %d deleted", id));
     }
 
+    @DeleteMapping(value = "/del/all")
+    public ResponseEntity<String> deleteAllCharacters(){
+        characterService.deleteAll();
+        return ResponseEntity.ok("All characters was deleted");
+    }
+
     @PatchMapping(value = "/change/name/{id}")
     public ResponseEntity<String> changeCharacterName(@PathVariable Integer id, @RequestBody String newName) {
         characterService.changeNameById(id, newName);

@@ -16,12 +16,12 @@ public class GuildServiceImpl implements GuildService {
 
     @Override
     public GuildEntity findByType(GuildType guildType) {
-        return guildRepository.findByName(guildType).orElseThrow(()-> new NoGuildException("Guild with name: " + guildType + " not found"));
+        return guildRepository.findByName(guildType).orElseThrow(() -> new NoGuildException("Guild with name: " + guildType + " not found"));
     }
 
     @Override
     public GuildEntity findById(Integer id) {
-        return guildRepository.findById(id).get();
+        return guildRepository.findById(id).orElseThrow(() -> new NoGuildException("Guild with id: " + id + " not found"));
     }
 
     @Override
@@ -33,6 +33,13 @@ public class GuildServiceImpl implements GuildService {
     public GuildEntity addGuild(GuildEntity guild) {
 
         return guildRepository.save(guild);
+    }
+
+    @Override
+    public void changeMessageOfTheDayById(Integer id, String newMessage) {
+        GuildEntity guild = findById(id);
+        guild.setMessageOfTheDay(newMessage);
+        guildRepository.save(guild);
     }
 
     @Override

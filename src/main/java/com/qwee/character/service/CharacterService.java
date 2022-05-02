@@ -18,7 +18,7 @@ public interface CharacterService {
     CharacterEntity save(CharacterEntity character);
 
     void deleteById(Integer id);
-
+    void deleteAll();
     void changeNameById(Integer id, String newName);
 
 

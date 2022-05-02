@@ -35,6 +35,9 @@ public class GuildEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "message")
+    private String messageOfTheDay;
+
     @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @Fetch(FetchMode.JOIN)
     @JsonManagedReference

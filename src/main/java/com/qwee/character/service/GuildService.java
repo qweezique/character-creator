@@ -7,9 +7,14 @@ import java.util.List;
 
 public interface GuildService {
     List<GuildEntity> findAll();
+
     GuildEntity findByType(GuildType guildType);
+
     GuildEntity findById(Integer id);
+
     GuildEntity addGuild(GuildEntity guild);
+
+    void changeMessageOfTheDayById(Integer id, String newMessage);
 
     void save(GuildEntity guildEntity);
 }

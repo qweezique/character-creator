@@ -70,6 +70,11 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    public void deleteAll() {
+        characterRepository.deleteAll();
+    }
+
+    @Override
     public void changeNameById(Integer id, String newName) {
         CharacterEntity character = findById(id);
         character.setName(newName);

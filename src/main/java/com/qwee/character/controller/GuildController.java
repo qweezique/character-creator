@@ -4,12 +4,10 @@ import com.qwee.character.entity.guild.GuildEntity;
 import com.qwee.character.model.dto.request.GuildType;
 import com.qwee.character.service.GuildServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,15 +33,31 @@ public class GuildController {
     }
 
     @GetMapping(value = "/init")
-    public void init() {
+    public ResponseEntity<List<GuildEntity>> init() {
         GuildEntity wizzardGuild = new GuildEntity();
         wizzardGuild.setDescription("Волшебнкии обладают высоким интеллектом, но слабы в ближних боях");
         wizzardGuild.setName(GuildType.WIZZARD);
+        wizzardGuild.setMessageOfTheDay("На сервере особый ивент: повышен дроп вещей для волшебников");
         guildService.addGuild(wizzardGuild);
 
         GuildEntity knightGuild = new GuildEntity();
         knightGuild.setDescription("Зачем нужен интеллект, если есть сила о отвага?");
+        knightGuild.setMessageOfTheDay("Все собираемся в городе для обсуждения стратегии");
         knightGuild.setName(GuildType.KNIGHT);
         guildService.addGuild(knightGuild);
+
+        GuildEntity thiefGuild = new GuildEntity();
+        thiefGuild.setDescription("Хочешь жить - умей вертеться; у воров повышенная ловкость");
+        thiefGuild.setMessageOfTheDay("Все на поиске редкого артефакта!");
+        thiefGuild.setName(GuildType.THIEF);
+        guildService.addGuild(thiefGuild);
+
+        return ResponseEntity.ok(List.of(wizzardGuild, knightGuild, thiefGuild));
+    }
+
+    @PatchMapping(value = "/change/message/{id}")
+    public ResponseEntity<String> changeMessageOfTheDayById(@PathVariable Integer id, @RequestBody String newMessage) {
+        guildService.changeMessageOfTheDayById(id, newMessage);
+        return ResponseEntity.ok(String.format("Message in guild with id: %d was changed to: %s", id, newMessage));
     }
 }
