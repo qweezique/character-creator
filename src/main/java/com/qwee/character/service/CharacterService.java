@@ -1,7 +1,7 @@
 package com.qwee.character.service;
 
 import com.qwee.character.entity.character.CharacterEntity;
-import com.qwee.character.model.dto.request.CharacterAdder;
+import com.qwee.character.model.dto.request.NewCharacterRequestDto;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface CharacterService {
 
     List<CharacterEntity> findAll();
 
-    CharacterEntity createCharacter(CharacterAdder adder);
+    CharacterEntity createCharacter(NewCharacterRequestDto adder);
 
     CharacterEntity save(CharacterEntity character);
 

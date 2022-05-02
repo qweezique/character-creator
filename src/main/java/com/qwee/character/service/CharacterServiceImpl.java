@@ -1,13 +1,14 @@
 package com.qwee.character.service;
 
+import com.qwee.character.entity.character.CharacterAttributes;
 import com.qwee.character.entity.character.CharacterEntity;
 import com.qwee.character.exception.NoCharacterException;
 import com.qwee.character.exception.NoElementsException;
-import com.qwee.character.model.dto.request.CharacterAdder;
+import com.qwee.character.model.dto.request.GuildType;
+import com.qwee.character.model.dto.request.NewCharacterRequestDto;
 import com.qwee.character.repository.CharacterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,10 +38,18 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public CharacterEntity createCharacter(CharacterAdder adder) {
+    public CharacterEntity createCharacter(NewCharacterRequestDto adder) {
+
+        GuildType typeFromRequest = adder.getType();
+
+        CharacterAttributes characterAttributes = new CharacterAttributes();
+        characterAttributes.setStrength(typeFromRequest.getStrength());
+        characterAttributes.setDexterity(typeFromRequest.getDexterity());
+        characterAttributes.setVitality(typeFromRequest.getVitality());
+        characterAttributes.setEnergy(typeFromRequest.getEnergy());
 
         CharacterEntity character = new CharacterEntity();
-        character.setAttributes(adder.getAttributes());
+        character.setAttributes(characterAttributes);
         character.setType(adder.getType());
         character.setName(adder.getName());
         character.setRegistrationDate(adder.getCreationDate());

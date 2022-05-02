@@ -1,7 +1,8 @@
 package com.qwee.character.controller;
 
 import com.qwee.character.entity.character.CharacterEntity;
-import com.qwee.character.model.dto.request.CharacterAdder;
+import com.qwee.character.model.dto.request.NewCharacterRequestDto;
+import com.qwee.character.model.dto.response.CharacterResponseDto;
 import com.qwee.character.service.CharacterServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
@@ -33,8 +34,19 @@ public class CharacterCRUDController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CharacterEntity> createCharacter(@RequestBody CharacterAdder adder) {
-        return ResponseEntity.ok(characterService.createCharacter(adder));
+    public ResponseEntity<CharacterResponseDto> createCharacter(@RequestBody NewCharacterRequestDto newCharacterRequestDto) {
+        CharacterEntity character = characterService.createCharacter(newCharacterRequestDto);
+
+        CharacterResponseDto characterToResponse = new CharacterResponseDto();
+
+        characterToResponse.setId(character.getId());
+        characterToResponse.setName(character.getName());
+        characterToResponse.setLevel(character.getLevel());
+        characterToResponse.setAttributes(character.getAttributes());
+        characterToResponse.setCharacterType(character.getType());
+        characterToResponse.setHasGuild(character.isHasGuild());
+
+        return ResponseEntity.ok(characterToResponse);
     }
 
     @DeleteMapping(value = "/del/{id}")
