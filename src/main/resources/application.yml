@@ -2,6 +2,7 @@ spring:
   application:
     name: character-creator
     version: 0.0.1-SNAPSHOT
+    description: Приложение для управления игровыми персонажами и гильдиями; выполнения игровых логик
 
 
   jpa:
@@ -22,3 +23,11 @@ server:
   port: 8080
   servlet:
     context-path: /character-creator
+
+
+springdoc:
+  contact:
+    name: Никита Ковалев
+    email: qweezique@gmail.com
+
+

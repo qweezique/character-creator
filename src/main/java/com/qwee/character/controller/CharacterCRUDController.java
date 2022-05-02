@@ -36,5 +36,17 @@ public class CharacterCRUDController {
     public ResponseEntity<CharacterEntity> createCharacter(@RequestBody CharacterAdder adder) {
         return ResponseEntity.ok(characterService.createCharacter(adder));
     }
+
+    @DeleteMapping(value = "/del/{id}")
+    public ResponseEntity<String> deleteCharacter(@PathVariable Integer id) {
+        characterService.deleteById(id);
+        return ResponseEntity.ok(String.format("Character with id: %d deleted", id));
+    }
+
+    @PatchMapping(value = "/change/name/{id}")
+    public ResponseEntity<String> changeCharacterName(@PathVariable Integer id, @RequestBody String newName) {
+        characterService.changeNameById(id, newName);
+        return ResponseEntity.ok(String.format("Name changed to %s", newName));
+    }
 }
 

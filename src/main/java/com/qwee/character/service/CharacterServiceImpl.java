@@ -7,6 +7,7 @@ import com.qwee.character.model.dto.request.CharacterAdder;
 import com.qwee.character.repository.CharacterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class CharacterServiceImpl implements CharacterService {
         character.setName(adder.getName());
         character.setRegistrationDate(adder.getCreationDate());
         character.setLevel(adder.getLevel());
-        character.setGuiled(false);
+        character.setHasGuild(false);
 
         return characterRepository.save(character);
     }
@@ -54,4 +55,15 @@ public class CharacterServiceImpl implements CharacterService {
         return characterRepository.save(character);
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        characterRepository.delete(findById(id));
+    }
+
+    @Override
+    public void changeNameById(Integer id, String newName) {
+        CharacterEntity character = findById(id);
+        character.setName(newName);
+        characterRepository.save(character);
+    }
 }

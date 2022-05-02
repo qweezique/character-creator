@@ -16,4 +16,10 @@ public interface CharacterService {
     CharacterEntity createCharacter(CharacterAdder adder);
 
     CharacterEntity save(CharacterEntity character);
+
+    void deleteById(Integer id);
+
+    void changeNameById(Integer id, String newName);
+
+
 }

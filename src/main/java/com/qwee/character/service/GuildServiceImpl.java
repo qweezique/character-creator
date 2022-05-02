@@ -1,6 +1,7 @@
 package com.qwee.character.service;
 
 import com.qwee.character.entity.guild.GuildEntity;
+import com.qwee.character.exception.NoGuildException;
 import com.qwee.character.model.dto.request.GuildType;
 import com.qwee.character.repository.GuildRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class GuildServiceImpl implements GuildService {
 
     @Override
     public GuildEntity findByType(GuildType guildType) {
-        return guildRepository.findByName(guildType);
+        return guildRepository.findByName(guildType).orElseThrow(()-> new NoGuildException("Guild with name: " + guildType + " not found"));
     }
 
     @Override

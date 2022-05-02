@@ -44,7 +44,7 @@ public class CharacterEntity {
     private GuildType type;
 
     @Column(name = "guilded")
-    private boolean isGuiled;
+    private boolean hasGuild;
 
     @Embedded
     private CharacterAttributes attributes;

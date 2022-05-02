@@ -14,6 +14,4 @@ public class CharacterAdder {
     private LocalDate creationDate = LocalDate.now();
     private CharacterAttributes attributes;
     private GuildType type;
-
-
 }

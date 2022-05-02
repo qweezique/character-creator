@@ -6,7 +6,6 @@ public enum GuildType {
     KNIGHT(2),
     THIEF(3);
 
-
     private Integer index;
 
     GuildType(Integer guildTypeToGuildIndex) {

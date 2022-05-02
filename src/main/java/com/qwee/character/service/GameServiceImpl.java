@@ -24,7 +24,7 @@ public class GameServiceImpl implements GameService {
         String name = character.getName();
 
         character.setGuild(guildService.findByType(type));
-        character.setGuiled(true);
+        character.setHasGuild(true);
         characterService.save(character);
 
         return String.format("Character with name %s was confirmed in his own guild: %s", name, type);

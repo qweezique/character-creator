@@ -16,16 +16,25 @@ public class SwaggerConfig {
     @Value("${spring.application.version}")
     private String appVersion;
 
+    @Value("${spring.application.description}")
+    private String appDescription;
+
+    @Value("${springdoc.contact.name}")
+    private String contactName;
+
+    @Value("${springdoc.contact.email}")
+    private String contactEmail;
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
                         .title(appName)
                         .version(appVersion)
-                        .description("Приложения для управления игровыми персонажами, добавление в гильдию")
+                        .description(appDescription)
                         .contact(new Contact()
-                                .name("Никита Ковалев")
-                                .email("qweezique@gmail.com"))
+                                .name(contactName)
+                                .email(contactEmail))
                 );
     }
 }
