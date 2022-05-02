@@ -3,11 +3,13 @@ package com.qwee.character.service;
 
 import com.qwee.character.entity.character.CharacterAttributes;
 import com.qwee.character.entity.character.CharacterEntity;
+import com.qwee.character.exception.NoElementsException;
 import com.qwee.character.model.dto.request.GuildType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -46,6 +48,12 @@ public class GameServiceImpl implements GameService {
             levelUpAndUpAttributesToCharacter(character);
             characterService.save(character);
         });
+    }
+
+    @Override
+    public CharacterEntity findTopLevelCharacter() {
+        List<CharacterEntity> all = characterService.findAll();
+       return all.stream().max(Comparator.comparing(CharacterEntity::getLevel)).orElseThrow(()-> new NoElementsException("Список пуст"));
     }
 
     private CharacterEntity levelUpAndUpAttributesToCharacter(CharacterEntity character) {
