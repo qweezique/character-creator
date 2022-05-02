@@ -32,7 +32,7 @@ public class CharacterServiceImpl implements CharacterService {
     public List<CharacterEntity> findAll() {
         List<CharacterEntity> all = characterRepository.findAll();
         if (all.isEmpty()) {
-            throw new NoElementsException("Not one Character is not in the database");
+            throw new NoElementsException("No one Characters in the database");
         }
         return all;
     }

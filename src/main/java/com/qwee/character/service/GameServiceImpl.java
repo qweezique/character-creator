@@ -1,12 +1,14 @@
 package com.qwee.character.service;
 
 
+import com.qwee.character.entity.character.CharacterAttributes;
 import com.qwee.character.entity.character.CharacterEntity;
 import com.qwee.character.model.dto.request.GuildType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -28,6 +30,31 @@ public class GameServiceImpl implements GameService {
         characterService.save(character);
 
         return String.format("Character with name %s was confirmed in his own guild: %s", name, type);
+    }
 
+    @Override
+    public void levelUptoCharacterById(Integer characterId) {
+        CharacterEntity character = characterService.findById(characterId);
+        levelUpAndUpAttributesToCharacter(character);
+        characterService.save(character);
+    }
+
+    @Override
+    public void levelUpToAllCharactersInGuild(GuildType guildType) {
+        List<CharacterEntity> characters = guildService.findByType(guildType).getCharacters();
+        characters.forEach(character -> {
+            levelUpAndUpAttributesToCharacter(character);
+            characterService.save(character);
+        });
+    }
+
+    private CharacterEntity levelUpAndUpAttributesToCharacter(CharacterEntity character) {
+        character.setLevel(character.getLevel() + 1);
+        CharacterAttributes attributes = character.getAttributes();
+        attributes.setStrength(attributes.getStrength() * 2);
+        attributes.setDexterity(attributes.getDexterity() * 2);
+        attributes.setVitality(attributes.getVitality() * 2);
+        attributes.setEnergy(attributes.getEnergy() * 2);
+        return character;
     }
 }
