@@ -15,4 +15,5 @@ public class CharacterAdder {
     private CharacterAttributes attributes;
     private GuildType type;
 
+
 }

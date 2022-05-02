@@ -1,7 +1,6 @@
 package com.qwee.character.entity.character;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qwee.character.entity.guild.GuildEntity;
 import com.qwee.character.model.dto.request.GuildType;
 import lombok.Getter;
@@ -18,31 +17,34 @@ import java.time.LocalDate;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "CHARACTER")
+@Table(name = "character")
 public class CharacterEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CHARACTER_ID")
+    @Column(name = "character_id")
     private Integer id;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "LEVEL")
+    @Column(name = "level")
     private Integer level;
 
-    @Column(name = "REGISTRATION_DATE")
+    @Column(name = "registration_date")
     private LocalDate registrationDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "GUILD_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "guild_id")
     @JsonBackReference
     private GuildEntity guild;
 
-    @Column(name = "TYPE")
+    @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private GuildType type;
+
+    @Column(name = "guilded")
+    private boolean isGuiled;
 
     @Embedded
     private CharacterAttributes attributes;

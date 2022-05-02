@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/guild")
 @RequiredArgsConstructor
 public class GuildController {
-
     private final GuildServiceImpl guildService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,5 +46,4 @@ public class GuildController {
         knightGuild.setName(GuildType.KNIGHT);
         guildService.addGuild(knightGuild);
     }
-
 }

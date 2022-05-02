@@ -44,6 +44,7 @@ public class CharacterServiceImpl implements CharacterService {
         character.setName(adder.getName());
         character.setRegistrationDate(adder.getCreationDate());
         character.setLevel(adder.getLevel());
+        character.setGuiled(false);
 
         return characterRepository.save(character);
     }

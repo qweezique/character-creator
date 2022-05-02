@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,22 +20,23 @@ import java.util.List;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "GUILD")
+@Table(name = "guild")
 public class GuildEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "GUILD_ID")
+    @Column(name = "guild_id")
     private Integer id;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     @Enumerated(EnumType.STRING)
     private GuildType name;
 
-    @Column(name = "DESCR")
+    @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @Fetch(FetchMode.JOIN)
     @JsonManagedReference
     private List<CharacterEntity> characters = new ArrayList<>();
 }
