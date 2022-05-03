@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  db:
+    container_name: db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'root'
+      POSTGRES_DB: 'ch'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./database-init:/docker-entrypoint-initdb.d
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - '8090:8080'
