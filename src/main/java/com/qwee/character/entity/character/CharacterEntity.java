@@ -23,7 +23,8 @@ import java.time.LocalDate;
 public class CharacterEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "character_id_gen", initialValue = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "character_id_gen")
     @Column(name = "character_id")
     private Integer id;
 
