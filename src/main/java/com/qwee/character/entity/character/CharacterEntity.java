@@ -3,6 +3,7 @@ package com.qwee.character.entity.character;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.qwee.character.entity.guild.GuildEntity;
 import com.qwee.character.model.dto.request.GuildType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "character")
+@Schema(description = "Сущность игрового персонажа")
 public class CharacterEntity {
 
     @Id
@@ -44,6 +46,7 @@ public class CharacterEntity {
     private GuildType type;
 
     @Column(name = "guilded")
+    @Schema(description = "Вступил/Не вступил в гильдию")
     private boolean hasGuild;
 
     @Embedded
