@@ -15,6 +15,4 @@ public interface GuildService {
     GuildEntity addGuild(GuildEntity guild);
 
     void changeMessageOfTheDayById(Integer id, String newMessage);
-
-    void save(GuildEntity guildEntity);
 }

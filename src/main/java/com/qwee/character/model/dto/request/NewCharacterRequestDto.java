@@ -21,17 +21,4 @@ public class NewCharacterRequestDto {
     private CharacterAttributes attributes;
 
     private GuildType type;
-
-//    @JsonIgnore
-//    public CharacterAttributes getAttributesByGuildType() {
-//
-//        this.attributes.setStrength(type.getStrength());
-//        this.attributes.setDexterity(type.getDexterity());
-//        this.attributes.setVitality(type.getVitality());
-//        this.attributes.setEnergy(type.getEnergy());
-//
-//        return this.attributes;
-
-//    }
-
 }

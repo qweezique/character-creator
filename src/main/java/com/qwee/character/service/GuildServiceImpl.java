@@ -41,9 +41,4 @@ public class GuildServiceImpl implements GuildService {
         guild.setMessageOfTheDay(newMessage);
         guildRepository.save(guild);
     }
-
-    @Override
-    public void save(GuildEntity guildEntity) {
-        guildRepository.save(guildEntity);
-    }
 }
