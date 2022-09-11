@@ -7,17 +7,22 @@ spring:
 
   jpa:
     database: POSTGRESQL
-    show-sql: true
     hibernate:
       ddl-auto: update
     open-in-view: false
     properties:
       generate-ddl: true
+      hibernate:
+        show_sql: false
+        format_sql: false
+    show-sql: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/ch
+#    url: jdbc:postgresql://localhost:5432/ch
+    url: jdbc:p6spy:postgresql://localhost:5432/ch
     username: root
     password: root
-    driverClassName: org.postgresql.Driver
+#    driverClassName: org.postgresql.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
 
 server:
   port: 8080
